@@ -104,7 +104,7 @@ Nous accompagnons les entreprises dans les étapes clés de leur évolution.
 </p>
   <hr class="my-4">
   <p></p>
-  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoirs plus</a>
+  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoirs un peu</a>
 </div><div class="jumbotron">
   <h1 class="display-4">Protectpeople</h1>
   <img src="img/protectpeople.png" width="250" height="80">
@@ -113,7 +113,7 @@ Nous appliquons le principe édifié par la Sécurité sociale française en 194
  </p>
   <hr class="my-4">
   <p>
-  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoirs plus</a>
+  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoir
 </div><div class="jumbotron">
   <h1 class="display-4">CDE</h1>
   <img src="img/CDE.png" width="250" height="80">
