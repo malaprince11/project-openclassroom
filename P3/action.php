@@ -35,7 +35,7 @@ if(isset($_GET['t'],$_GET['id']) AND !empty($_GET['t']) AND !empty($_GET['id']))
       }
       header('Location:connexion.php')
    } else {
-      exit('Erreur fatale. <a href="connexion.php">Revenir à l\'accueil</a>');
+      exit('Erreur tres fatale. <a href="connexion.php">Revenir à l\'accueil</a>');
    }
 } else {
    exit('Erreur fatale. <a href="connexion.php">Revenir à l\'accueil</a>');
