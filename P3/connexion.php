@@ -1,21 +1,36 @@
 <?php
 session_start();
-if ($_SESSION['id'] == null AND $_SESSION['pseudo'] == null )
+$bdd = new PDO('mysql:host=127.0.0.1;dbname=gbaf','root','');
+
+if(isset($_POST['form'])){
+  $pseudoconnect = htmlspecialchars($_POST['pseudoconnect']);
+  $mdpconnect = htmlspecialchars($_POST['mdpconnect']);
+  if(!empty($pseudoconnect) AND !empty($mdpconnect))
 {
-	header("location: connexion.php");
+  $requser = $bdd->prepare("SELECT * FROM extranet WHERE pseudo = ? AND motdepasse = ?");
+  $requser->execute(array($pseudoconnect, $mdpconnect));
+  $userexist = $requser -> rowCount();
+  if($userexist == 1){
+    $userinfo = $requser->fetch();
+    $_SESSION['id'] = $userinfo['id'];
+    $_SESSION['pseudo'] = $userinfo['pseudo'];
+    header("location: banque.php");
+  }
+  else
+  {
+    $erreur = "Mauvais identenfiant";
+  }
+}else
+{
+  $erreur = "Tous les champs ne sont pas remplie !";
+}
 
 }
 ?>
-
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Comparateur de service</title>
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-
-</head>
-<body>
-	<meta charset="utf-8">
+<html lang="fr">
+  <head>
+    <meta charset="utf-8">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -85,48 +100,53 @@ if ($_SESSION['id'] == null AND $_SESSION['pseudo'] == null )
     </form>
   </div>
 </nav>
-<div class="jumbotron">
-  <h1 class="display-4">Formation&Co</h1>
-  <img src="img/formation_co.png" width="250" height="80">
-  <p class="lead">Formation&co est une association française présente sur tout le territoire.
-Nous proposons à des personnes issues de tout milieu de devenir entrepreneur grâce à un crédit et un accompagnement professionnel et personnalisé.
-Notre proposition : 
-  </p>
-  <hr class="my-4">
-  <p></p>
-  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoirs plus</a>
-</div>
-<div class="jumbotron">
-  <h1 class="display-4">DSA France</h1>
-  <img src="img/Dsa_france.png" width="250" height="80">
-  <p class="lead">Dsa France accélère la croissance du territoire et s’engage avec les collectivités territoriales.
-Nous accompagnons les entreprises dans les étapes clés de leur évolution.
-</p>
-  <hr class="my-4">
-  <p></p>
-  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoirs un peu</a>
-</div><div class="jumbotron">
-  <h1 class="display-4">Protectpeople</h1>
-  <img src="img/protectpeople.png" width="250" height="80">
-  <p class="lead">Protectpeople finance la solidarité nationale.
-Nous appliquons le principe édifié par la Sécurité sociale française en 1945 : permettre à chacun de bénéficier d’une protection sociale.
- </p>
-  <hr class="my-4">
-  <p>
-  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoir
-</div><div class="jumbotron">
-  <h1 class="display-4">CDE</h1>
-  <img src="img/CDE.png" width="250" height="80">
-  <p class="lead">La CDE (Chambre Des Entrepreneurs) accompagne les entreprises dans leurs démarches de formation. 
-Son président est élu pour 3 ans par ses pairs, chefs d’entreprises et présidents des CDE.
-  </p>
-  <hr class="my-4">
-  <p></p>
-  <a class="btn btn-primary btn-lg" href="banque2.php" role="button">en savoirs plus</a>
-</div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+<main role="main" class="container">
+
+  <div class="starter-template">
+    <h1>Bootstrap starter template</h1>
+    <p class="lead">bienvenue dans l'extranet banquaire GBAF</p>
+    <p>Le comparateur de service banquaire trouvez la banque qu'il vous faut !</p>
+  </div>
+
+</main>
+<!-- /.container -->
 
 </body>
+</html>
+        <div id="login">
+        <h3 class="text-center text-white pt-5">Login form</h3>
+        <div class="container">
+            <div id="login-row" class="row justify-content-center align-items-center">
+                <div id="login-column" class="col-md-6">
+                    <div id="login-box" class="col-md-12">
+                        <form id="login-form" class="form" action="" method="post">
+                            <h3 class="text-center text-info">Connexion</h3>
+                            <div class="form-group">
+                                <label for="username" class="text-info">Pseudo</label><br>
+                                <input type="text" name="username" id="username" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="password" class="text-info">Mot de passe:</label><br>
+                                <input type="text" name="password" id="password" class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="remember-me" class="text-info"><span>
+                                Ce souvenir de moi</span> <span><input id="remember-me" name="remember-me" type="checkbox"></span></label><br>
+                                <input type="submit" name="submit" class="btn btn-info btn-md" value="envoyé">
+                            </div>
+                            <div id="register-link" class="text-right">
+                                <a href="new inscription.php" class="text-info">s'inscrire ici</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+</body>
+
 </html>
