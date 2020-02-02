@@ -23,9 +23,6 @@
         <a class="nav-link" href="acceuil.php">connexion</a>
       </li>
     </ul>
-    <span class="navbar-text">
-      Navbar text with an inline element
-    </span>
   </div>
   </a>
 </nav>
