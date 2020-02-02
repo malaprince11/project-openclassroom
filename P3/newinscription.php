@@ -88,7 +88,7 @@ if(isset($_POST['form'])) {
         <a class="nav-link" href="connexion.php">Connexion <span class="sr-only">(current)</span></a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="newinscription.php">inscription</a>
+        <a class="nav-link" href="newinscription.php">inscrption</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" href="main.php">Main</a>
