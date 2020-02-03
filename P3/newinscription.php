@@ -21,9 +21,9 @@ if(isset($_POST['form'])) {
                $mailexist = $reqmail->rowCount();
                if($mailexist == 0) {
                   if($mdp == $mdp2) {
-                     $insertmbr = $bdd->prepare("INSERT INTO extranet(pseudo, prenom, nom, mdp ,question, reponse) VALUES(?,?,?, ?, ?, ?)");
-                     $insertmbr->execute(array($pseudo, $prenom ,$nom ,$mdp ,$question,$reponse));
-                     $erreur = "Votre compte a bien été créé ! <a href=\"acceuil.php\">Me connecter</a>";
+                     $insertmbr = $bdd->prepare("INSERT INTO extranet(pseudo, prenom, nom, mail, mdp ,question, reponse) VALUES(?, ?, ?, ?, ?, ?, ?)");
+                     $insertmbr->execute(array($pseudo, $prenom ,$nom ,$mail, $mdp , $question, $reponse));
+                     $erreur = "Votre compte a bien été créé ! <a href=\"connexion.php\">Me connecter</a>";
                   } else {
                      $erreur = "Vos mots de passes ne correspondent pas !";
                   }
@@ -105,9 +105,9 @@ if(isset($_POST['form'])) {
 <main role="main" class="container">
 
   <div class="starter-template">
-    <h1>Bootstrap starter template</h1>
-    <p class="lead">bienvenue dans l'extranet banquaire GBAF</p>
-    <p>Le comparateur de service banquaire trouvez la banque qu'il vous faut !</p>
+    <h1>bienvenue dans l'extranet banquaire GBAF</h1>
+    <p class="lead">Créer vous un compte </p>
+    <p>Le comparateur de service banquaire</p>
   </div>
 
 </main>
@@ -126,7 +126,7 @@ if(isset($_POST['form'])) {
 </body>
 </html>
       <div align="center">
-         <h2>Inscription</h2>
+         <h2>Créer vous un compte</h2>
          <br /><br />
          <form method="POST" action="">
             <table>

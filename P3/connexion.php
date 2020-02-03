@@ -7,12 +7,11 @@ if(isset($_POST['form'])){
   $mdpconnect = htmlspecialchars($_POST['mdpconnect']);
   if(!empty($pseudoconnect) AND !empty($mdpconnect))
 {
-  $requser = $bdd->prepare("SELECT * FROM extranet WHERE pseudo = ? AND motdepasse = ?");
+  $requser = $bdd->prepare("SELECT * FROM extranet WHERE pseudo = ? AND mdp = ?");
   $requser->execute(array($pseudoconnect, $mdpconnect));
   $userexist = $requser -> rowCount();
   if($userexist == 1){
     $userinfo = $requser->fetch();
-    $_SESSION['id'] = $userinfo['id'];
     $_SESSION['pseudo'] = $userinfo['pseudo'];
     header("location: banque.php");
   }
@@ -105,6 +104,9 @@ if(isset($_POST['form'])){
                 <div id="login-column" class="col-md-6">
                     <div id="login-box" class="col-md-12">
                         <form id="login-form" class="form" action="" method="post">
+                          <div align="center">
+                          <img class="mb-4" src="img/logo.png" alt="" width="85" height="85">
+                          </div>
                             <h3 class="text-center text-info">Connexion</h3>
                             <div class="form-group">
                                 <label for="username" class="text-info">Pseudo</label><br>
